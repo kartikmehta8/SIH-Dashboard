@@ -1,8 +1,22 @@
 // import MapContainer from "./Map.js";
 import ReactGoogleMaps from "./Map.js";
 import Messages from "./Messages";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 function App() {
+    const [data, setData] = useState();
+
+    useEffect(() => {
+        axios
+            .get("https://earlysuraksha.herokuapp.com/api/es/getAllDanger")
+            .then((data) => {
+                setData(data.data);
+            });
+    }, []);
+
+    if (!data) setData([{}]);
+
     return (
         <div>
             <div className="flex justify-end py-4 px-6 bg-blue-600 text-white">
@@ -28,10 +42,10 @@ function App() {
                     </div>
                 </div>
                 <div>
-                    <Messages />
+                    <Messages data={data} />
                 </div>
             </div>
-            <div
+            {/* <div
                 className="grid grid-cols-4 py-4 bg-blue-600 text-white"
                 style={{ textAlign: "center" }}
             >
@@ -39,7 +53,7 @@ function App() {
                 <div>Active Cases</div>
                 <div>Food</div>
                 <div>Shelter</div>
-            </div>
+            </div> */}
         </div>
     );
 }
