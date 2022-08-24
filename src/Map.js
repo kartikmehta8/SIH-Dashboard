@@ -4,37 +4,34 @@
 //Then go to credentials and enable credentials.
 // Create a .env file and create a variable REACT_APP_API_KEY = <API_KEY>
 
-import React, { Component } from "react";
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
+import _ from "lodash";
+import React from "react";
+import { compose, withProps } from "recompose";
+import {
+    withScriptjs,
+    withGoogleMap,
+    GoogleMap,
+    Marker,
+} from "react-google-maps";
 
-export class MapContainer extends Component {
-    render() {
-        return (
-            <Map
-                google={this.props.google}
-                initialCenter={{
-                    lat: 40.854885,
-                    lng: -88.081807,
-                }}
-                zoom={15}
-                onClick={this.onMapClicked}
-            >
-                <Marker
-                    onClick={this.onMarkerClick}
-                    name={"Current location"}
-                />
+const MyMapComponent = compose(
+    withProps({
+        googleMapURL:
+            "https://maps.googleapis.com/maps/api/js?key=AIzaSyBqRIMbYtfo6i0eNVbQ6myB1MNiA6_DVSw&v=3.exp&libraries=geometry,drawing,places",
+        loadingElement: <div style={{ height: `100%` }} />,
+        containerElement: <div style={{ height: `400px` }} />,
+        mapElement: <div style={{ height: `100%` }} />,
+    }),
+    withScriptjs,
+    withGoogleMap
+)((props) => (
+    <GoogleMap defaultZoom={8} defaultCenter={{ lat: -34.397, lng: 150.644 }}>
+        <Marker position={{ lat: -34.397, lng: 150.644 }} />
+    </GoogleMap>
+));
 
-                <InfoWindow onClose={this.onInfoWindowClose}>
-                    <div>
-                        {/* <h1>{this.state.selectedPlace.name}</h1> */}
-                        <h1>DEMO PLACE</h1>
-                    </div>
-                </InfoWindow>
-            </Map>
-        );
-    }
-}
+const enhance = _.identity;
 
-export default GoogleApiWrapper({
-    apiKey: process.env.REACT_APP_API_KEY,
-})(MapContainer);
+const ReactGoogleMaps = () => [<MyMapComponent key="map" />];
+
+export default enhance(ReactGoogleMaps);

@@ -1,4 +1,5 @@
 // import MapContainer from "./Map.js";
+import ReactGoogleMaps from "./Map.js";
 import Messages from "./Messages";
 
 function App() {
@@ -22,7 +23,9 @@ function App() {
                             Search
                         </span>
                     </div>
-                    <div>{/* <MapContainer /> */}</div>
+                    <div>
+                        <ReactGoogleMaps />
+                    </div>
                 </div>
                 <div>
                     <Messages />
