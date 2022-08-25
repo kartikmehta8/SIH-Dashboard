@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { MessageDisplay } from "./MessageDisplay";
 
 export default function Messages({ data }) {
     const [message, setMessage] = useState({});
@@ -44,13 +45,13 @@ export default function Messages({ data }) {
         <div>
             <div className="flex text-xl py-4 justify-between px-12">
                 <span>Locations</span>
-                <span
+                {/* <span
                     className="py-1 px-2 text-sm bg-red-600 text-white hover:bg-red-800"
                     style={{ cursor: "pointer" }}
                     onClick={() => fetchMessage()}
                 >
                     Refresh Messages
-                </span>
+                </span> */}
             </div>
             <div
                 className="accordion accordion-flush"
@@ -146,9 +147,7 @@ export default function Messages({ data }) {
                                         <span className="text-sm text-green-600 font-bold">
                                             Messages : &nbsp;&nbsp;&nbsp;
                                         </span>
-                                        {JSON.stringify(
-                                            messagesFU[item.pincode]
-                                        )}
+                                        <MessageDisplay pin={item.pincode} />
                                     </div>{" "}
                                     <br />
                                 </div>
