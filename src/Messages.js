@@ -5,6 +5,7 @@ import { MessageDisplay } from "./MessageDisplay";
 export default function Messages({ data }) {
     const [message, setMessage] = useState({});
     const [messagesFU, setMessagesFU] = useState({});
+    const [c, setC] = useState(1);
 
     const items = data.data || [];
     const pincodes = [];
@@ -39,6 +40,9 @@ export default function Messages({ data }) {
                 { pin: pincode, msg: message }
             )
             .then(console.log("Data Sent."));
+
+        console.log(message);
+        setC(0);
     };
 
     return (
@@ -159,10 +163,11 @@ export default function Messages({ data }) {
                                 <div className="flex justify-start my-2  mx-12 sans pb-12">
                                     <input
                                         type="text"
-                                        value={message[item._id]}
-                                        onChange={(e) =>
-                                            setMessage(e.target.value)
-                                        }
+                                        value={c === 0 ? "" : message[item._id]}
+                                        onChange={(e) => {
+                                            setC(1);
+                                            setMessage(e.target.value);
+                                        }}
                                         placeholder={
                                             "Message to Pin:" + item.pincode
                                         }
@@ -172,7 +177,10 @@ export default function Messages({ data }) {
                                         className="py-2 px-6 bg-blue-600 shadow-xl rounded-r-xl text-white hover:bg-blue-700"
                                         style={{ cursor: "pointer" }}
                                         onClick={() =>
-                                            handleSubmit(item.pincode, message)
+                                            handleSubmit(
+                                                item.pincode,
+                                                message
+                                            ).then((message[item._id] = ""))
                                         }
                                     >
                                         Send
