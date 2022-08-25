@@ -1,5 +1,5 @@
 // import MapContainer from "./Map.js";
-import ReactGoogleMaps from "./Map.js";
+// import ReactGoogleMaps from "./Map.js";
 import Messages from "./Messages";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -18,28 +18,29 @@ function App() {
     if (!data) setData([{}]);
 
     return (
-        <div>
-            <div className="flex justify-end py-4 px-6 bg-blue-600 text-white">
+        <div className="mb-2">
+            <div className="flex justify-end py-4 px-6 bg-blue-600 text-white poppins">
                 Dashboard
             </div>
-            <div className="grid grid-cols-2 gap-4" style={{ height: "100vh" }}>
+            <div
+                className="grid grid-cols-1 gap-4 px-24"
+                // style={{ height: "100vh" }}
+            >
                 <div>
-                    <div className="flex justify-center my-10">
+                    <div className="flex justify-center my-10 sans">
                         <input
                             type="text"
-                            placeholder="Search..."
-                            className="py-4 px-6 border-2 border-r-0 border-black"
+                            placeholder="Search Here"
+                            className="py-4 px-6 w-3/4 shadow-xl rounded-l-xl"
                         />
                         <span
-                            className="py-4 px-6 bg-blue-600 border-2 border-black border-l-0 text-white hover:bg-blue-700"
+                            className="py-4 px-6 bg-blue-600 border-2 rounded-r-xl shadow-xl  text-white hover:bg-blue-700"
                             style={{ cursor: "pointer" }}
                         >
                             Search
                         </span>
                     </div>
-                    <div>
-                        <ReactGoogleMaps />
-                    </div>
+                    <div>{/* <ReactGoogleMaps /> */}</div>
                 </div>
                 <div>
                     <Messages data={data} />

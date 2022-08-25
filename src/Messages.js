@@ -44,7 +44,10 @@ export default function Messages({ data }) {
     return (
         <div>
             <div className="flex text-xl py-4 justify-between px-12">
-                <span>Locations</span>
+                <span className="text-3xl text-gray-800 sans">
+                    <span className="text-black font-bold">#&nbsp;</span>
+                    Locations
+                </span>
                 {/* <span
                     className="py-1 px-2 text-sm bg-red-600 text-white hover:bg-red-800"
                     style={{ cursor: "pointer" }}
@@ -86,7 +89,7 @@ export default function Messages({ data }) {
                                 aria-expanded="false"
                                 aria-controls="flush-collapseOne"
                             >
-                                <span className="font-bold text-lg">
+                                <span className="font-bold poppins text-2xl">
                                     {item.city}
                                 </span>
                             </button>
@@ -98,45 +101,45 @@ export default function Messages({ data }) {
                             data-bs-parent="#accordionFlushExample"
                         >
                             <div className="accordion-body py-4 px-5">
-                                <div className="grid grid-cols-2">
+                                <div className="grid grid-cols-2 poppins">
                                     <div>
-                                        <span className="text-sm text-gray-800 font-bold">
+                                        <span className="text-lg text-gray-800 font-bold sans">
                                             State : &nbsp;&nbsp;&nbsp;
                                         </span>
                                         {item.state}
                                     </div>{" "}
                                     <div>
-                                        <span className="text-sm text-gray-800 font-bold">
+                                        <span className="text-lg text-gray-800 font-bold sans">
                                             Pincode : &nbsp;&nbsp;&nbsp;
                                         </span>
                                         {item.pincode}
                                     </div>{" "}
                                     <div>
-                                        <span className="text-sm text-gray-800 font-bold">
+                                        <span className="text-lg text-gray-800 font-bold sans">
                                             Latitude : &nbsp;&nbsp;&nbsp;
                                         </span>
                                         {item.loc.lat}
                                     </div>{" "}
                                     <div>
-                                        <span className="text-sm text-gray-800 font-bold">
+                                        <span className="text-lg text-gray-800 font-bold sans">
                                             Longitude : &nbsp;&nbsp;&nbsp;
                                         </span>
                                         {item.loc.long}
                                     </div>{" "}
                                     <div>
-                                        <span className="text-sm text-green-600 font-bold">
+                                        <span className="text-lg text-green-600 font-bold sans">
                                             Food : &nbsp;&nbsp;&nbsp;
                                         </span>
                                         {item.food}
                                     </div>{" "}
                                     <div>
-                                        <span className="text-sm text-green-600 font-bold">
+                                        <span className="text-lg text-green-600 font-bold sans">
                                             Shelter : &nbsp;&nbsp;&nbsp;
                                         </span>
                                         {item.shelter}
                                     </div>{" "}
                                     <div>
-                                        <span className="text-sm text-green-600 font-bold">
+                                        <span className="text-lg text-green-600 font-bold sans">
                                             Medical Staff : &nbsp;&nbsp;&nbsp;
                                         </span>
                                         {item.medicalStaff}
@@ -144,7 +147,7 @@ export default function Messages({ data }) {
                                 </div>
                                 <div className="flex justify-between">
                                     <div>
-                                        <span className="text-sm text-green-600 font-bold">
+                                        <span className="text-lg text-red-600 font-bold sans">
                                             Messages : &nbsp;&nbsp;&nbsp;
                                         </span>
                                         <MessageDisplay pin={item.pincode} />
@@ -153,18 +156,20 @@ export default function Messages({ data }) {
                                 </div>
                             </div>
                             <div>
-                                <div className="flex justify-center my-2  mx-12">
+                                <div className="flex justify-start my-2  mx-12 sans pb-12">
                                     <input
                                         type="text"
                                         value={message[item._id]}
                                         onChange={(e) =>
                                             setMessage(e.target.value)
                                         }
-                                        placeholder="Message..."
-                                        className="py-2 px-6 border-2 border-r-0 border-black w-3/4"
+                                        placeholder={
+                                            "Message to Pin:" + item.pincode
+                                        }
+                                        className="py-2 px-6 rounded-l-xl shadow-xl w-1/2"
                                     />
                                     <span
-                                        className="py-2 px-6 bg-blue-600 border-2 border-black border-l-0 text-white hover:bg-blue-700"
+                                        className="py-2 px-6 bg-blue-600 shadow-xl rounded-r-xl text-white hover:bg-blue-700"
                                         style={{ cursor: "pointer" }}
                                         onClick={() =>
                                             handleSubmit(item.pincode, message)
