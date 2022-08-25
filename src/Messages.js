@@ -22,7 +22,7 @@ export default function Messages({ data }) {
                 .then((response) => {
                     setMessagesFU({
                         ...messagesFU,
-                        pincode: response.data.messages[0],
+                        [pincode]: response.data.messages[0],
                     });
                 })
         );
@@ -42,7 +42,16 @@ export default function Messages({ data }) {
 
     return (
         <div>
-            <div className="flex justify-center text-xl py-4">Locations</div>
+            <div className="flex text-xl py-4 justify-between px-12">
+                <span>Locations</span>
+                <span
+                    className="py-1 px-2 text-sm bg-red-600 text-white hover:bg-red-800"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => fetchMessage()}
+                >
+                    Refresh Messages
+                </span>
+            </div>
             <div
                 className="accordion accordion-flush"
                 id="accordionFlushExample"
@@ -132,19 +141,15 @@ export default function Messages({ data }) {
                                         {item.medicalStaff}
                                     </div>{" "}
                                 </div>
-                                <div>
+                                <div className="flex justify-between">
                                     <div>
                                         <span className="text-sm text-green-600 font-bold">
                                             Messages : &nbsp;&nbsp;&nbsp;
                                         </span>
-                                        {JSON.stringify(messagesFU["pincode"])}
+                                        {JSON.stringify(
+                                            messagesFU[item.pincode]
+                                        )}
                                     </div>{" "}
-                                    <span
-                                        style={{ cursor: "pointer" }}
-                                        onClick={() => fetchMessage()}
-                                    >
-                                        Refresh
-                                    </span>
                                     <br />
                                 </div>
                             </div>
